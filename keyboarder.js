@@ -358,12 +358,13 @@ var KeyBoarder = (function () {
 		elbody.addEventListener('keyup', KeyBoarder.highlightKeys);
 		
 		var regkeys = kbkeys.join('|');
-		if( !CONFIG.safeMode )
-			var regstr = new RegExp('[\\s|,\\-]?((?:'+regkeys+'|F\\d\\d?\\s)\\s*\\'+CONFIG.concatenator+
-							'?\\s*){1,4}([A-Z0-9\\*\\+\\-](\\s*\\+\\s*[A-Z0-9])?|[A-Z0-9]\\'+CONFIG.concatenator+'[A-Z0-9]?){0,1}(?:[,\\s])?','g');
-		else
+		if( !CONFIG.safeMode ){
+			var qsym = CONFIG.matchAtLeast ? '+' : '?'; // if consecutive keys are set, then at least one concatenator symbol must exist
+			var regstr = new RegExp('[\\s|,\\-]?((?:'+regkeys+'|F\\d\\d?\\s)\\s*\\'+CONFIG.concatenator+qsym+
+							'\\s*){1,4}([A-Z0-9\\*\\+\\-](\\s*\\+\\s*[A-Z0-9])?|[A-Z0-9]\\'+CONFIG.concatenator+'[A-Z0-9]?){0,1}(?:[,\\s\\"\\\'<\\/])','g');
+		}else{
 			var regstr = /[\s|,]?((?:STRG|CTRL|SHIFT|RETURN|ENTER|ALT|ALTR|SPACE|WIN|FN|UP|DOWN|LEFT|RIGHT|ESC|DEL)\s{0,2}\+\s?){1,2}[A-Z0-9][,]?\s/g
-		
+		}
 		if( CONFIG.isDEBUG )
 			console.log(regstr)
 		var regs = new Array(
@@ -406,11 +407,15 @@ var KeyBoarder = (function () {
 			//further clean up the string
 			//m = m.replace(/.../g, "");
 			
-			var arg, concat = '<b class="kbConcat">'+ CONFIG.concatenator +'</b>';
+			var arg, endtag = ''; concat = '<b class="kbConcat">'+ CONFIG.concatenator +'</b>';
+			if( m[m.length-1] === '<' ){//dirty fix; captured part of the endtag
+				m = m.substr(0,m.length-1);
+				endtag =  '<';
+			}	
 			var elHtml = CONFIG.keyHtmlElem;
 			//'concatenator' can't be at posiition 0
 			if( m.indexOf( CONFIG.concatenator ) > -1 ){
-				arg = m.split( CONFIG.concatenator );
+				arg = m.split( RegExp('\\s*\\'+CONFIG.concatenator+'\\s*') );
 				//faster than forEach / for in
 				for(var i=0; i<arg.length; i++){
 					arg[i] = '<'+ elHtml +' class="kbKey kb'+ arg[i].toString().trim() +'">' + arg[i].toString().trim() + '</'+ elHtml +'>'; 
@@ -420,7 +425,7 @@ var KeyBoarder = (function () {
 				arg = '<'+ elHtml +' class="kbKey">' + m.trim() + '</'+ elHtml +'>'; 
 			}
 			//commas before and after are allowed and included in the total-match
-			return arg.replace(/,/g, '');
+			return arg.replace(/,\\"\\-/g, '')+endtag;
 		}
 		//add as a method to this class
 		this.regmatch = regmatch;
