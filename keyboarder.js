@@ -350,8 +350,8 @@ var KeyBoarder = (function () {
 		//add basic keymap to the prototype chain
 		CONFIG.KEYMAP.__proto__ = KEYCODESBASIC;
 		for(var i in CONFIG.KEYMAP){
-			KEYMAPIDX[i] = 0;
-			KEYMAPflip[ CONFIG.KEYMAP[i] ] = i; //+= i+'|'...to handle one to many relationships
+			KEYMAPIDX[i.toLowerCase()] = 0;
+			KEYMAPflip[ CONFIG.KEYMAP[i] ] = i; //+= i+'|'...to handle one keyCode to many keyLiterals - relationships
 		}
 		//private variables
 		
@@ -422,14 +422,15 @@ var KeyBoarder = (function () {
 				arg = m.split( RegExp('\\s*\\'+CONFIG.concatenator+'\\s*') );
 				//faster than forEach / for in
 				for(var i=0; i<arg.length; i++){
-					arg[i] = '<'+ elHtml +' class="kbKey kb'+ arg[i].toString().trim() +'">' + arg[i].toString().trim() + '</'+ elHtml +'>'; 
+					//all individual CSS-Key classes are of the form .kbKEY {...} e.g. .kbCTRL {....}, 
+					arg[i] = '<'+ elHtml +' class="kbKey kb'+ arg[i].toString().toUpperCase().trim() +'">' + arg[i].toString().trim() + '</'+ elHtml +'>'; 
 				}
 				arg = arg.join( concat );
 			} else { // simple key e.g. ' ESC '
-				arg = '<'+ elHtml +' class="kbKey">' + m.trim() + '</'+ elHtml +'>'; 
+				arg = '<'+ elHtml +' class="kbKey kb'+m.toUpperCase().trim()+'">' + m.trim() + '</'+ elHtml +'>'; 
 			}
 			//commas before and after are allowed and included in the total-match
-			return arg.replace(/,|\"|\-/g, '')+endtag;
+			return arg.replace(/,|\-/g, '')+endtag;
 		}
 		//add as a method to this class
 		this.regmatch = regmatch;
@@ -546,7 +547,7 @@ var KeyBoarder = (function () {
 			//keylit: keyliteral...contains the literal key-name
 			if( keylit = KeyBoarder.keyCodeToKey(e.keyCode) ){
 				var i = KEYMAPIDX[keylit];
-				var ele =  document.getElementsByClassName('kb'+keylit)
+				var ele =  document.getElementsByClassName('kb'+keylit.toUpperCase())
 				if(!ele.length) 
 					return
 				//add class, and scroll to the element
@@ -561,7 +562,7 @@ var KeyBoarder = (function () {
 		if(e.type === 'keyup' ){
 			//evaluates to: if(  e.keyCode == + CONFIG.KEYMAP['STRG'] ){
 			if( keylit = KeyBoarder.keyCodeToKey(e.keyCode) ){
-				var ele =  document.getElementsByClassName('kb'+keylit)
+				var ele =  document.getElementsByClassName('kb'+keylit.toUpperCase())
 				if(!ele.length) 
 					return
 				var i = KEYMAPIDX[keylit] === 0 ? ele.length-1 : KEYMAPIDX[keylit]-1; //remove current css-class
@@ -573,7 +574,7 @@ var KeyBoarder = (function () {
 	}
 	//returns a literal key from a key code
 	clsKb.keyCodeToKey = function(keyCode){
-		return KEYMAPflip[keyCode]
+		return KEYMAPflip[keyCode].toLowerCase();
 	}
 	
 	//private static
