@@ -1,0 +1,291 @@
+<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.0 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>
+<!--
+Please contribute if you like the project. Fork it on github github.com/lsauer
+
+Make sure to take advantage of the message button on github if you have feedback about any of this stuff.
+
+
+Copyright (C) 2001 by L. Sauer, lsauer.com
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+-->
+<html>
+	<head>
+		<title>KeyBoarder Demo site - JS Library for dynamic keybord shortcut rendering</title>
+		<style>
+			@import url("keyboarder.css");
+			hr::after {
+				content: ".···•···.";
+				letter-spacing: 1em;
+			}
+			html {
+				background-color: #fff;
+			}
+
+			/*
+			 Styles which only concern this demo page
+			 */
+			.xtrm {
+				margin: 5px;
+			}
+			.divKb{
+				color:#fff;
+				padding: 5px;
+				border-radius:5px;
+				background-color: #a4a5aa;
+				background-image: -webkit-gradient(
+						linear,
+						left top,
+						left bottom,
+						color-stop(0, rgb(200,200,200)),
+						color-stop(1, rgb(160,166,170))
+				)
+			}
+			.demoDiv {
+				margin:10px;
+				padding:20px;
+				border-radius:10px;
+				float:left;
+				background-color:#fff;			
+			}
+
+		</style>
+    <script type="text/javascript" src="keyboarder.js" charset="utf-8"></script>
+	</head>
+	<body class="content">
+    <div class="divkb">	
+		<p><h1>KeyBoarder v.6 </h1>
+		...automatically converts textual references of keyboard shortcuts into graphical representations. It is fast, small and has no other dependencies (such as jquery). The idea behind KeyBoarder is that updating past or upcomings documents with static markup, just so that all keyboard shortcuts are highlighted is tedious, put mildly. <br>
+		Additionally KeyBoarder
+		seeks to enable easy event binding for the dynamically rendered shortcut keys. It already has an event-binder which enables jumping from shortcut to shortcut by pressing the respective key.<br>
+		<br>
+		  KeyBoarder may be ideally suited for blogs, documents and help files which contain lots of keyboard shortcuts.
+		  Only two lines of code are required: one for importing the css-file containing the styles, and the other for importing the JavaScript into the HTML document.		</p>
+    <p>e.g. <br>
+		</p>
+    <div>
+      <pre><span style="color: #008080;">1</span> <span style="color: #0000FF;">&lt;</span><span style="color: #800000;">head</span><span style="color: #0000FF;">&gt;</span><span style="color: #000000;">
+</span><span style="color: #008080;">2</span> <span style="color: #0000FF;">&lt;</span><span style="color: #800000;">title</span><span style="color: #0000FF;">&gt;</span><span style="color: #000000;">KeyBoarder Demo site - JS Library for dynamic keybord-shortcut rendering</span><span style="color: #0000FF;">&lt;/</span><span style="color: #800000;">title</span><span style="color: #0000FF;">&gt;</span><span style="color: #000000;">
+</span><span style="color: #008080;">3</span> <span style="color: #0000FF;">&lt;</span><span style="color: #800000;">style</span><span style="color: #0000FF;">&gt;</span><span style="background-color: #F5F5F5; color: #800000;">
+</span><span style="color: #008080;"><strong>4</strong></span> <strong><span style="background-color: #F5F5F5; color: #800000;">@import url(&quot;https://github.com/lsauer/KeyBoarder/raw/master/keyboarder.css&quot;)</span></strong><span style="background-color: #F5F5F5; color: #800000;">; 
+</span><span style="color: #008080;">5</span> <span style="color: #0000FF;">&lt;/</span><span style="color: #800000;">style</span><span style="color: #0000FF;">&gt;</span><span style="color: #000000;">
+</span><span style="color: #008080;"><strong>6</strong></span> <span style="background-color: #F5F5F5;"><strong><span style="color: #0000FF;">&lt;</span><span style="color: #800000;">script </span><span style="color: #FF0000;">type</span><span style="color: #0000FF;">=&quot;text/javascript&quot;</span><span style="color: #FF0000;"> src</span><span style="color: #0000FF;">=&quot;https://github.com/lsauer/KeyBoarder/raw/master/keyboarder.js&quot;</span><span style="color: #FF0000;"> charset</span><span style="color: #0000FF;">=&quot;utf-8&quot;&gt;&lt;/</span><span style="color: #800000;">script</span><span style="color: #0000FF;">&gt;</span></strong></span><span style="color: #000000;">
+</span><span style="color: #008080;">7</span> <span style="color: #000000;"></span><span style="color: #0000FF;">&lt;/</span><span style="color: #800000;">head</span><span style="color: #0000FF;">&gt;</span> .......</pre></div>
+<p>
+</div>
+<br>
+<div class="divkb">		
+
+KeyBoarder takes as configuration arguments the className of the HTML elements containing the content with key shortcuts.  (e.g. a blog post). Many other options are available, and explained within the javascript-file.</p>
+  <p>Upon pressing a key which belongs to a rendered shortcut, KeyBoarder will highlight and focus the key-shortcut, and with each further press, advance to the next consecutive element matching the key of the key-shortcut. <br>
+  This is particularly suited for navigating long texts, like a blog, a help-file or HTML-manpage. Keys can be bound to other events, and/or rendered individually on per-key-class basis. Designing is simply done with css-classes.<br>
+    <br />
+  </p>
+    
+    From the design perspective, KeyBoarder features several beautiful styles to choose from. As such KeyBoarder can also used as a mere css-class file.</p>
+  <div class="demoDiv" style="background-color:inherit;">
+    <kbd class="xtrm kbKey">BASE </kbd><br>
+		<kbd class="xtrm kbKeyModern" title="This is the modern kbKey-class" style="cursor:help">MODERN</kbd><br>
+        <kbd class="xtrm kbKeyFancy">Fancy</kbd><br>
+		<kbd class="xtrm kbKeyDark">Dark</kbd><br>
+		<kbd class="xtrm kbKeyLight">Light</kbd><br>
+ 		<kbd class="xtrm kbKeySimple">Simple</kbd>
+  </div>
+<div class="xtrm demoDiv" >
+        <kbd class="xtrm kbKey">BASE </kbd><br>
+		<kbd class="xtrm kbKeyModern" title="This is the modern kbKey-class" style="cursor:help">MODERN</kbd><br>
+        <kbd class="xtrm kbKeyFancy">Fancy</kbd><br>
+		<kbd class="xtrm kbKeyDark">Dark</kbd><br>
+		<kbd class="xtrm kbKeyLight">Light</kbd><br>
+ 		<kbd class="xtrm kbKeySimple">Simple</kbd>
+  </div>
+		
+        
+<p><br />
+	KeyBoarder uses the kbd element of HTML-3, which allows device specific native treatment by the browser of the client.
+	<br />
+	<br />
+	In order to recognize keys, KEYS must conform to certain conventions: <br>
+	Keys must be written in UPPERCASE, Startcase or either of those casing-conventions and keys must be concatenated by a symbol e.g. '+' or '-', '~', but can also be recognized singly upon setting the corresponding option. <br>
+	A minimum number of consecutive keys can be configured, with rendering of keys only happening when this number of consecutive keys is met. e.g. rendering ALT+X but not ALT<br>
+	<br />
+	Keys can be designed with css, and several default designs are included.<br>
+	<br />
+  <strong>Examples</strong> for writing Key-shortcuts that KeyBoarder recognizes: </p>
+<pre>
+This is a simple shortcut ALT+WIN+U 
+ALT + WIN+ P /*this is fine*/!
+somewhere in the text, ALT + RETURN - a key shortcut!
+...in order to enter the text press, STRG+ ENTER
+you can set different styles in preformatted tex
+</pre>
+For demonstration KeyBorder is applied to an excerpt of the shortcut key table of Open Office Writer:<br>
+<br>
+<table border="0" style="border:1px solid #aaa; border-radius:6px;" class="kbKeyModern">
+  <tbody><tr>
+<th> Shortcut Keys
+</th><th> Effect
+</th></tr>
+<tr>
+<td> <i>Ctrl+A</i>
+</td><td> Select All.
+</td></tr>
+<tr>
+<td> <i>Ctrl+J</i>
+</td><td> Justify.
+</td></tr>
+<tr>
+<td> <i>Ctrl+D</i>
+</td><td> Double Underline.
+</td></tr>
+<tr>
+<td> <i>Ctrl+E</i>
+</td><td> Centred.
+</td></tr>
+<tr>
+<td> <i>Ctrl+F</i>
+</td><td> Find and Replace.
+</td></tr>
+<tr>
+<td> <i>Ctrl+Shift+P</i>
+</td><td> Superscript.
+</td></tr>
+<tr>
+<td> <i>Ctrl+L</i>
+</td><td> Align Left.
+</td></tr>
+<tr>
+<td> <i>Ctrl+R</i>
+</td><td> Align Right.
+</td></tr>
+<tr>
+<td> <i>Ctrl+Shift+B</i>
+</td><td> Subscript.
+</td></tr>
+<tr>
+<td> <i>Ctrl+Y</i>
+</td><td> Redo last action.
+</td></tr>
+<tr>
+<td> <i>Ctrl+0 (zero)</i>
+</td><td> Apply Default paragraph style.
+</td></tr>
+<tr>
+<td> <i>Ctrl+1</i>
+</td><td> Apply Heading 1 paragraph style.
+</td></tr>
+<tr>
+<td> <i>Ctrl+2</i>
+</td><td> Apply Heading 2 paragraph style.
+</td></tr>
+<tr>
+<td> <i>Ctrl+3</i>
+</td><td> Apply Heading 3 paragraph style.
+</td></tr>
+<tr>
+<td> <i>Ctrl+5</i>
+</td><td> 1.5 Line Spacing.
+</td></tr>
+<tr>
+  <td> <i>Ctrl+Enter</i>
+  </td><td> Manual page break.
+</td></tr>
+<tr>
+<td> <i>Ctrl+Shift+Enter</i>
+</td><td> Column break in multi-columnar texts.
+</td></tr>
+<tr>
+<td> <i>Alt+Enter</i>
+</td><td> Inserting a new paragraph without numbering.
+</td></tr>
+<tr>
+<td> <i>Alt+Enter</i>
+</td><td> Inserting a new paragraph directly before or after a section or a table.
+</td></tr></tbody></table>
+
+  <p><br />
+  <strong>Keys can be nested: </strong><br>
+  <br />
+    <kbd class="kbKey kbKeyNested"> STRG+ WIN+O </kbd> <br />
+    <kbd class="kbKey kbKeyNested"> STRG+P+D </kbd> WIN T , or RETURN X should not be rendered<br />
+    <kbd class="kbKey kbKeyNested"> CTRL+ALT+O </kbd>fsf asdfdsf<br>
+    <br>
+    <br>
+    <strong>When Keys are not rendered:</strong><br>
+<br>
+In the following examples, keys will<strong> not be rendered</strong> due to varrying issues (with KeyBoarder v.7 most are rendered): <br>
+<br>
+STRG - ALT - DEL //Without single key reconition mode, this text will not be rendered, since the concatenation-symbol in this example is set to '+'<br />
+  </p>
+	<pre>
+STG+ALT //missspelling<br>
+STRG+OI //missing concatenator
+ALT+G�Z //non recognized concatenator</pre>
+
+<br><br><strong>When Keys ARE rendered:</strong><br>
+<pre>
+"ALT + DEL"
+CTRL+ALT - DEL  //Del is not part of the shortcut, since '-' is not set as a concatenation symbol
+,ALT+DEL",
+</pre>
+<p><strong>Dev Notes:</strong><br>
+  <br>
+  * A pure DOM version attempted but ran slower. <br>
+  * Lots of improvements in the RegEx can still be done<br>
+  <br />
+  press the following combination
+  ALT+I, / ALT+X, <br>
+  <br>
+  <br>
+  <strong>
+  <input type="text" size="2" onKeyUp="this.value = event.keyCode; this.select();" />
+  Q</strong>uickly determine a keyCode with just one line of code, - in case the key-mappings do not match the most common keyboard layout of your audience. Click in the box and press a key. Once letting go of the key, the keyCode value will be written into the box. To implement this in your own site, use the following code: </p>
+<pre>&lt;input type=&quot;text&quot; size=&quot;2&quot; onKeyUp=&quot;this.value = event.keyCode; this.select();&quot; /&gt;</pre>
+<textarea style="width:98%; height:12em;">
+  author:       L. Sauer 2011 (c); lsauer.com
+  project:      KeyBoarder
+  description:  keyBoarder is a small, fast javascript library for dynamically rendering visually 
+  appealing, navigatable keyboard shortcuts.
+  license:      MIT license (commercial use is ok)
+
+Please contribute if you like the project. Fork it on github: https://github.com/lsauer/KeyBoarder
+Make sure to take advantage of the message button on github if you have feedback about any of this stuff.
+
+/*--------------------------README-------EMDAER------------------------------*/
+
+**Features: **
+    * No cluttering of your hundreds of documents with static markup for every single shortcut key
+    * Event binding: Navigating / Focusing of each key upon press
+    * Beautiful design: visual feedback of the currently active key
+    * Configurable: KeyBoarder can be limited to several HTML element containers
+    * Keyboarder can coexist: several differnt instances can process different 
+      parts of a site differently
+    * Individual styles and events down to single key classes
+    * Ideal for blogs, help-documentations,.. with lots of shortcut keys
+    * Supports Markdown or any text-based documents well
+    * Highly configurable
+
+http://code.google.com/p/keyboarder/
+</textarea>
+</div>
+<p><br />
+  <br />
+</p>
+
+	</body></html>

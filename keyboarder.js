@@ -263,6 +263,7 @@ var KeyBoarder = (function () {
 		keyHtmlElem : 'kbd',
 		matchAtLeast : 0,
 		isStartCasing : false,
+		stripPunctuation : true,
 		/**
 		 * The most common keycodes defined by :
 		 * @type {Object.<number>}
@@ -331,6 +332,8 @@ var KeyBoarder = (function () {
 	 For a complete list of options, see the CONFIG object in the keyBoarder 'class'
 	 */
 	var clsKb =  function (kbconfig) {
+		this.self = this;
+		
 		//override default settings
 		for(var i in kbconfig){
 			CONFIG[i] = kbconfig[i];
@@ -404,8 +407,9 @@ var KeyBoarder = (function () {
 				return m;
 			//to a type cast, actually that would be: String(m)
 			m = m.toString();
-			//further clean up the string
-			//m = m.replace(/.../g, "");
+			//further clean up of the passed string
+			if( CONFIG.stripPunctuation )
+				m = m.replace( RegExp(',|\\"|\\-|\\\'|\\*|\\#|\\\\|\\;|\\:|\\||\\.|\\!|\\$|\\&|\\%', 'g'), '');
 			
 			var arg, endtag = ''; concat = '<b class="kbConcat">'+ CONFIG.concatenator +'</b>';
 			if( m[m.length-1] === '<' ){//dirty fix; captured part of the endtag
@@ -413,7 +417,7 @@ var KeyBoarder = (function () {
 				endtag =  '<';
 			}	
 			var elHtml = CONFIG.keyHtmlElem;
-			//'concatenator' can't be at posiition 0
+			//'concatenator' must not be the first character e.g. text .... shortcut is +ALT text continues...
 			if( m.indexOf( CONFIG.concatenator ) > -1 ){
 				arg = m.split( RegExp('\\s*\\'+CONFIG.concatenator+'\\s*') );
 				//faster than forEach / for in
@@ -425,10 +429,27 @@ var KeyBoarder = (function () {
 				arg = '<'+ elHtml +' class="kbKey">' + m.trim() + '</'+ elHtml +'>'; 
 			}
 			//commas before and after are allowed and included in the total-match
-			return arg.replace(/,\\"\\-/g, '')+endtag;
+			return arg.replace(/,|\"|\-/g, '')+endtag;
 		}
 		//add as a method to this class
 		this.regmatch = regmatch;
+		//string: HTML Elements property holding the html content
+		this.htmlproptext = ''
+		
+		var restore = function(){
+			for(var i=0; i< CONFIG.clsNames.length; i++) {
+				var el = document.getElementsByClassName( CONFIG.clsNames[i] )[0]; //todo: walk through all elements
+				if(typeof el === 'undefined')
+					continue;
+				if( typeof self.originaltext[CONFIG.clsNames[i]] !== 'undefined'){
+					el[self.htmlproptext] = self.originaltext[CONFIG.clsNames[i]];
+					return true;
+				}else{
+					return false;
+				}
+			}
+		}
+		this.restore = restore;
 		
 		//Intitiliazing and update, e.g. when changing the classNames
 		var init = function(){
@@ -443,12 +464,21 @@ var KeyBoarder = (function () {
 			var reFlag = 'g';	//not used; global flag; RegExp's second param; 
 			//var el, text, reFlag, regs;
 			for(var i=0; i< CONFIG.clsNames.length; i++) {
-				//variables in the loop provide a tighter scope, and aid the garbage collector in being able to collect dead references
+				//variables declared in the immediate var-scope aid the garbage collector in being able to collect sooner dead references
 				var el = document.getElementsByClassName( CONFIG.clsNames[i] )[0]; //todo: walk through all elements
-				if(el === undefined)
+				if(typeof el === 'undefined')
 					continue;
-				var text  = el.innerHTML || el.innerText || el.value;
-
+				if( typeof this.originaltext === 'undefined'){
+					//contains the original, unaltered html
+					this.originaltext = {};
+				}
+				if( typeof this.originaltext[CONFIG.clsNames[i]] !== 'undefined'){
+					var text  = this.originaltext[CONFIG.clsNames[i]];
+				}else{
+					var text  = el.innerHTML || el.innerText || el.value;
+					this.originaltext[CONFIG.clsNames[i]] = text;
+				}
+				
 				this.regmatch = '';
 				for(var j =0; j<regs.length; j++) {
 					text = text.replace( 
@@ -467,13 +497,16 @@ var KeyBoarder = (function () {
 				}
 				var strLimitForChg = 10;
 				if(typeof el.innerHTML !== 'undefined'){
+					this.htmlproptext = 'innerHTML';
  						//did the text actually change?
 					if( Math.abs( el.innerHTML.length - text.length) > strLimitForChg)
 						el.innerHTML = text;
 				} else if( typeof el.innerText !== 'undefined' ){
+					this.htmlproptext = 'innerText';
 					if( Math.abs( el.innerText.length - text.length) > strLimitForChg)
 						el.innerText = text;
 				} else if( typeof el.value !== 'undefined' ){
+					this.htmlproptext = 'value';
 					if( Math.abs( el.value.length - text.length) > strLimitForChg)
 						el.value = text;
 				}else
@@ -533,6 +566,7 @@ var KeyBoarder = (function () {
 		return KEYMAPflip[keyCode]
 	}
 	
+	//private static
 	//returns the ASCII key code
 	function keyCode(n) {
 		if (n === null) {
