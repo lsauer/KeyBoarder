@@ -438,14 +438,18 @@ var KeyBoarder = (function () {
 		
 		var restore = function(){
 			for(var i=0; i< CONFIG.clsNames.length; i++) {
-				var el = document.getElementsByClassName( CONFIG.clsNames[i] )[0]; //todo: walk through all elements
-				if(typeof el === 'undefined')
-					continue;
-				if( typeof self.originaltext[CONFIG.clsNames[i]] !== 'undefined'){
-					el[self.htmlproptext] = self.originaltext[CONFIG.clsNames[i]];
-					return true;
-				}else{
-					return false;
+				var els = document.getElementsByClassName( CONFIG.clsNames[i] )[0];
+				for(var j=0; j< els.length; j++)
+				{				
+					var ij_indexOrigtext = CONFIG.clsNames[i]+','+j; 
+					if(typeof el === 'undefined')
+						continue;
+					if( typeof self.originaltext[ ij_indexOrigtext ] !== 'undefined'){
+						el[self.htmlproptext] = self.originaltext[ ij_indexOrigtext ];
+						return true;
+					}else{
+						return false;
+					}
 				}
 			}
 		}
@@ -463,55 +467,61 @@ var KeyBoarder = (function () {
 			
 			var reFlag = 'g';	//not used; global flag; RegExp's second param; 
 			//var el, text, reFlag, regs;
-			for(var i=0; i< CONFIG.clsNames.length; i++) {
+			for(var i=0; i< CONFIG.clsNames.length; i++)
+			{
 				//variables declared in the immediate var-scope aid the garbage collector in being able to collect sooner dead references
-				var el = document.getElementsByClassName( CONFIG.clsNames[i] )[0]; //todo: walk through all elements
-				if(typeof el === 'undefined')
-					continue;
-				if( typeof this.originaltext === 'undefined'){
-					//contains the original, unaltered html
-					this.originaltext = {};
+				var els = document.getElementsByClassName( CONFIG.clsNames[i] );
+				for(var j=0; j< els.length; j++)
+				{
+					var el = els[j];
+					if(typeof el === 'undefined')
+						continue;
+					if( typeof this.originaltext === 'undefined'){
+						//contains the original, unaltered html
+						this.originaltext = {};
+					}
+					var ij_indexOrigtext = CONFIG.clsNames[i]+','+j; 
+					if( typeof this.originaltext[ ij_indexOrigtext ] !== 'undefined'){
+						var text  = this.originaltext[ ij_indexOrigtext ];
+					}else{
+						var text  = el.innerHTML || el.innerText || el.value;
+						this.originaltext[ ij_indexOrigtext ] = text;
+					}
+					
+					this.regmatch = '';
+					for(var k =0; k<regs.length; k++) {
+						text = text.replace( 
+								regs[k],
+								// The interpreter expects a closure here, to bypass this we are wrapping
+								// the result in another function e.g. 'return regmatch( arguments[0] );'
+								// within the closure, functions wouldn't be called;
+								// The first argument contains the entire match, the last the entire text;
+								function(){
+									return regmatch( arguments[0] );
+								}
+						);
+					}
+					if( CONFIG['isDebug'] ){
+							console.log( text);
+					}
+					var strLimitForChg = 10;
+					if(typeof el.innerHTML !== 'undefined'){
+						this.htmlproptext = 'innerHTML';
+							//did the text actually change?
+						if( Math.abs( el.innerHTML.length - text.length) > strLimitForChg)
+							el.innerHTML = text;
+					} else if( typeof el.innerText !== 'undefined' ){
+						this.htmlproptext = 'innerText';
+						if( Math.abs( el.innerText.length - text.length) > strLimitForChg)
+							el.innerText = text;
+					} else if( typeof el.value !== 'undefined' ){
+						this.htmlproptext = 'value';
+						if( Math.abs( el.value.length - text.length) > strLimitForChg)
+							el.value = text;
+					}else
+						return false;
 				}
-				if( typeof this.originaltext[CONFIG.clsNames[i]] !== 'undefined'){
-					var text  = this.originaltext[CONFIG.clsNames[i]];
-				}else{
-					var text  = el.innerHTML || el.innerText || el.value;
-					this.originaltext[CONFIG.clsNames[i]] = text;
-				}
-				
-				this.regmatch = '';
-				for(var j =0; j<regs.length; j++) {
-					text = text.replace( 
-							regs[j],
-							// The interpreter expects a closure here, to bypass this we are wrapping
-							// the result in another function e.g. 'return regmatch( arguments[0] );'
-							// within the closure, functions wouldn't be called;
-							// The first argument contains the entire match, the last the entire text;
-							function(){
-								return regmatch( arguments[0] );
-							}
-					);
-				}
-				if( CONFIG['isDebug'] ){
-						console.log( text);
-				}
-				var strLimitForChg = 10;
-				if(typeof el.innerHTML !== 'undefined'){
-					this.htmlproptext = 'innerHTML';
- 						//did the text actually change?
-					if( Math.abs( el.innerHTML.length - text.length) > strLimitForChg)
-						el.innerHTML = text;
-				} else if( typeof el.innerText !== 'undefined' ){
-					this.htmlproptext = 'innerText';
-					if( Math.abs( el.innerText.length - text.length) > strLimitForChg)
-						el.innerText = text;
-				} else if( typeof el.value !== 'undefined' ){
-					this.htmlproptext = 'value';
-					if( Math.abs( el.value.length - text.length) > strLimitForChg)
-						el.value = text;
-				}else
-					return false;
-			}
+			}//end for
 			return true;
 		};
 		this.init = init;
