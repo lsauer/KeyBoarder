@@ -4,11 +4,12 @@
   description:  keyBoarder is a small, fast javascript library for dynamically rendering visually appealing, navigatable keyboard shortcuts.
   license:      MIT license (commercial use is ok)
 */
-
-//CONFIG: parameters to be passed to the keyboarder constructor; usually the css-classNames of the Elements to be rendered suffices
+/*--------------START OF CONFIG--------------*/
+//kbparams {object}: configuration parameters to be passed to the keyboarder constructor; usually the css-classNames of the Elements to be rendered suffices
+//it's okay to pass no parameters and use the default ones: e.g. kb = new KeyBoarder()
 
 kbparams = {
-	clsNames : ["content", "claro"],	//css-classNames of the Elements in which shortcuts should be rendered e.g. <div class="content"> My blog-post content </div>
+	clsNames : ["content"],				//css-classNames of the Elements in which shortcuts should be rendered e.g. <div class="content"> My blog-post content </div>
 										//mixed-type: string of one class or array of classnames
 	isDebug : false,					//useful during development; provides verbose output
 	safeMode : false,					//fallback to an older better tested Regular expression
@@ -17,12 +18,18 @@ kbparams = {
 	keyHtmlElem : 'kbd',				//the HTML element type in which shortcuts are embedded 
 	isStartCasing : true,				//if your shortcuts start with an upper case like this Alt + Ctrl + X
 	isBothCasing : true,				//explicitly allows StartCasing and UPPERCASING
+	stripPunctuation : true,			//whether any matched ASCI print symbols e.g. *#%&... should remain with the key or be stripped
+
 	/**
 	 * The most common keycodes defined by :
 	 * @type {Object.<number>}
 	 * @const
 	 */
 	KEYMAP : {
+		/*delete: just for demonstration*/
+		UPPERCASE : 0,
+		Startcase : 0,
+		
 		STRG: 16,
 		CTRL: 17,
 		/*CTRL: 17,
@@ -71,10 +78,12 @@ kbparams = {
 HTMLElement css-class setter/getter Object
 HTML Elements can have several classes, separated by space ' '. The rightmost css-class takes precedence
 author: L.Sauer 2011, MIT License
-*/		
+*/
+isOpera = (/opera/i.test(navigator.userAgent)) ? true : false;
+
 Classy = function(el){
 	//constructor
-	if(el && el.constructor === ''.constructor){ //I dislike 'typeof'
+	if(el && el.constructor === String ){
 		el = document.getElementsByClassName(el)[0];
 	}
 	//private shared
@@ -256,14 +265,17 @@ var KeyBoarder = (function () {
 	}
 	
 	//default parameters
-	var CONFIG = {
-		clsNames : ["content"],
-		isDebug : true,
-		concatenator : '+',
-		keyHtmlElem : 'kbd',
-		matchAtLeast : 0,
-		isStartCasing : false,
-		stripPunctuation : true,
+	var CONFIG = {		
+	clsNames : ["content", "claro"],	//css-classNames of the Elements in which shortcuts should be rendered e.g. <div class="content"> My blog-post content </div>
+										//mixed-type: string of one class or array of classnames
+	isDebug : false,					//useful during development; provides verbose output
+	safeMode : false,					//fallback to an older better tested Regular expression
+	concatenator : '+',					//the concat symbol used for declaring shortcuts e.g. ALT + X
+	matchAtLeast : 0, 					//number of consecutive keys present for a match to occur
+	keyHtmlElem : 'kbd',				//the HTML element type in which shortcuts are embedded 
+	isStartCasing : true,				//if your shortcuts start with an upper case like this Alt + Ctrl + X
+	isBothCasing : true,				//explicitly allows StartCasing and UPPERCASING
+	stripPunctuation : true,			//whether any matched ASCI print symbols e.g. *#%&... should remain with the key or be stripped
 		/**
 		 * The most common keycodes defined by :
 		 * @type {Object.<number>}
@@ -332,7 +344,11 @@ var KeyBoarder = (function () {
 	 For a complete list of options, see the CONFIG object in the keyBoarder 'class'
 	 */
 	var clsKb =  function (kbconfig) {
+		//set self reference for public static methods
 		this.self = this;
+		if(arguments.length === 0){
+			var kbconfig = {};
+		}
 		
 		//override default settings
 		for(var i in kbconfig){
@@ -357,8 +373,8 @@ var KeyBoarder = (function () {
 		
 		//attach event handlers for shortcut navigation
 		var elbody = document.getElementsByTagName('body')[0];
-		elbody.addEventListener('keydown', KeyBoarder.highlightKeys);
-		elbody.addEventListener('keyup', KeyBoarder.highlightKeys);
+		elbody.addEventListener( 'keydown', KeyBoarder.highlightKeys);
+		elbody.addEventListener( 'keyup', KeyBoarder.highlightKeys);
 		
 		var regkeys = kbkeys.join('|');
 		if( !CONFIG.safeMode ){
@@ -458,14 +474,15 @@ var KeyBoarder = (function () {
 		
 		//Intitiliazing and update, e.g. when changing the classNames
 		var init = function(){
-			if( kbconfig.constructor === String ){
-				CONFIG.clsNames.push(kbconfig); //add
-			} else if( kbconfig.constructor === Object ){
-				CONFIG.clsNames = kbconfig['clsNames']; //replace
-			}else{
-				throw new TypeError("unexpected Object passed to constructor");	
+			if(arguments.length > 0){ //were configuration parameters passed?
+				if( kbconfig.constructor === String ){
+					CONFIG.clsNames.push(kbconfig); //add
+				} else if( kbconfig.constructor === Object ){
+					CONFIG.clsNames = kbconfig['clsNames']; //replace
+				}else{
+					throw new TypeError("unexpected Object passed to constructor");	
+				}
 			}
-			
 			var reFlag = 'g';	//not used; global flag; RegExp's second param; 
 			//var el, text, reFlag, regs;
 			for(var i=0; i< CONFIG.clsNames.length; i++)
@@ -617,7 +634,13 @@ var KeyBoarder = (function () {
 		//TODO: error handling
 		window.addEventListener("error", function(e){console.error("KeyBoarder-Error:", e)} );
 		//example of how to initiate
-		window.addEventListener("load", function(e){ var kb = new KeyBoarder(kbparams); } );
-		//var kb = new KeyBoarder( ["content", "claro"] );	
+		/* Opera converts the addEventListener inline, thus not allowing string concatenation*/
+		if(/opera/i.test(navigator.userAgent )) //navigator.taintEnabled conveniently checks for Mozilla browsers
+			window.addEventListener("DOMContentLoaded", function(e){ var kb = new KeyBoarder(kbparams); }, null ); //opera 11x exclusively requires newer event-conventions
+			//document.addEventListener("domcontentready", function(e){ var kb = new KeyBoarder(kbparams); } ); // document.ondomcontentloaded 
+		else
+			window.addEventListener("load", function(e){ var kb = new KeyBoarder(kbparams); } );
+		//var kb = new KeyBoarder( ["content", "claro"] );
+		
 	}
 })(window);
