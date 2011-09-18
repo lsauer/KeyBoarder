@@ -11,16 +11,15 @@ article, aside, footer, header, hgroup, nav, section {
 	display: block;
 }
 #social {
-	position:absolute;
-	top:25px;
+	position:fixed;
+	top:15px;
 	right:15px;
 	padding: 10px;
 	padding-left:80px;
 	background: #666 url(../img/user_comment_dryiconsDOTcom.png) no-repeat 6px 6px;
-	opacity:.7;
+	opacity:.6;
 	float: left;
-	width: 200px;
-	margin-top: 20px;
+	width: 180px;
 	background-color: #999;
 	border: 1px solid #e1e1e1;
 	border-radius: .8em;
