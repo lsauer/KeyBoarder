@@ -7,7 +7,36 @@ html,body {
 	line-height: 1.5;
 	color: #444;
 }
-
+article, aside, footer, header, hgroup, nav, section {
+	display: block;
+}
+#social {
+	position:absolute;
+	top:25px;
+	right:15px;
+	padding: 10px;
+	padding-left:80px;
+	background: #666 url(../img/user_comment_dryiconsDOTcom.png) no-repeat 6px 6px;
+	opacity:.7;
+	float: left;
+	width: 200px;
+	margin-top: 20px;
+	background-color: #999;
+	border: 1px solid #e1e1e1;
+	border-radius: .8em;
+	-moz-border-radius: .8em;
+	-webkit-border-radius: .8em;
+}
+#social:hover {
+  opacity: 1.0;
+  -moz-transition: opacity 0.6s;
+  -webkit-transition: opacity 0.6s;
+  -o-transition: opacity 0.6s;
+}
+#social div {
+	float: left;
+	margin-right: 5px;
+}
 /* Layout */
 
 img {
@@ -79,8 +108,12 @@ li{
 	color: #fff;
 
 }
+.liTick {
+	padding-left: 20px;
+	background: #666 url(../ico/bulb16.png) no-repeat 4px 5px;
+}
 .liOptions {
-	background: #666 url(res/ico/bulb16.png) no-repeat 4px 1px;
+	background: #666;
 	clear:both;
 	display:block;
 }
@@ -88,6 +121,10 @@ li{
 	padding: 8px;	
 }
 .clear {clear:both}
+
+.social {
+
+}
 
 #header {
     margin: 60px auto;
@@ -256,7 +293,7 @@ h3{
 	width: 230px;
 	margin-top: 20px;
 	padding: 10px;
-	background-color: #ececec;
+	background-color: #999;
 	border: 1px solid #e1e1e1;
 	border-radius: 10px;
 	-moz-border-radius: 10px;
@@ -285,72 +322,10 @@ h3{
 	list-style-type: none;
 	padding: 2px 0 2px 0;
 }
-
-.trysmalltalk {
-    text-align: right;
-    padding: 10px;
-}
-
-.trysmalltalk textarea {
-    width: 850px;
-    height: 300px;
-    padding: 20px;
-    background-color: #eaeaea;
-    border: 1px solid #d3d3d3;
-    border-radius: 10px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    font: 16px monaco, courier, monospace;
-    color: 434343;
-    line-height: 1.6em;
-}
-
-.trysmalltalk button {
-    margin: 20px 0 0 5px;
-    padding: 4px;
-    background: #75aef5;
-    border: 1px solid #7caeed;
-    border-radius: 8px;
-    -moz-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    color: white;
-    cursor: pointer;
-}
-
-.trysmalltalk .print-it {
-	background: #bebebe;
-	border: 1px solid #b2b2b2;
-}
-
-.trysmalltalk button:hover {
-	background: #3180e1;
-	border: 1px solid #518cd6; 
-}
-
-#counters {
-    border: 2px dashed;
-    text-align: center;
-    padding: 10px;
-    margin: 10px;
-    background: #ffffcc;
-    font-family: arial,helvetica,sans;
-}
-
-#counters h1 {
-    margin: 10px;
-    color: #333;
-}
-
-
-.trysmalltalk .print-it:hover {
-	background: #898989;
-	border: 1px solid #919293; 
-}
-
 #footer {
-	height: 200px;
+	height: 180px;
 	border: 1px solid #ccc;
-	background: #f3f3f3 url('../images/mosquito.png') 50px 20px no-repeat;
+	background: #f3f3f3 url('../img/keyboard_grey.png') 20px 10px no-repeat;
 	margin: 0 auto;
 }
 
@@ -372,4 +347,3 @@ h3{
 #footer a:hover {
 	text-decoration: underline;
 }
-

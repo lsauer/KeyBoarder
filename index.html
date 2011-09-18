@@ -65,7 +65,37 @@
     </script>
   </head>
   <body>
-
+    <!-- START OF SOCIAL BUTTONS -->
+        <section id="social">
+        <!-- data-layout:   standard; button_count; box_count.-->
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#appId=168052469944126&xfbml=1";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <div class="fb-like" data-href="http://lsauer.github.com/KeyBoarder" data-send="false" data-layout="box_count" data-width="50" data-show-faces="false" data-font="verdana"></div>
+    <!-- data-count:   horizontal (default)/ vertical; -->
+    <div>
+    <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://lsauer.github.com/KeyBoarder" data-text="#KeyBoarder - outlining key shortcuts the smart way!"  data-count="vertical" data-via="sauerlo">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    </div>
+    <div> 
+      <!-- Place this tag where you want the +1 button to render: data-size: standard/tall -->
+      <div class="g-plusone" data-size="tall"></div>
+      
+      <!-- Place this render call where appropriate --> 
+      <script type="text/javascript">
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script> 
+    </div>
+    </section>
+    <!-- END OF SOCIAL BUTTONS-->
     <a href="http://github.com/lsauer/keyboarder"><img style="position: absolute; top: 0; left: 0; border: 0;" src="res/img/forkme.png" alt="Fork me on GitHub"></a>
 
     <div id="wrapper">
@@ -99,7 +129,7 @@
 <li class="liOptions"><img src="res/img/process_dryiconsDOTcom.png" width="80" height="80" class="IconFeature"> <strong>Dynamic rendering: </strong><br>
 	       <br>
          no need to mess up documents with static markup</li><br>
-	      <br>
+
       </span></div>
 	  <div class="column content">
 <div class="divKb">		<strong>KeyBoarder Details:<br>
@@ -133,7 +163,7 @@ Keys can be bound to other events (e.g. the mousewheel), and/or rendered individ
 	  <div class="clear"></div>
       
       	  <div class="content divExamples">
-                        <li class="liFeature" style="background: #666;"> <input type="checkbox" name="liExamples" id="liExamples" value="true"> <label for="liExamples">Tick, to show example usage and demonstrations </label><span id="spWservtxt" style="display:none; padding:10px;"><br>
+                        <li class="liFeature liTick"> <input type="checkbox" name="liExamples" id="liExamples" value="true"> <label for="liExamples">Tick, to show example usage and demonstrations </label><span id="spWservtxt" style="display:none; padding:10px;"><br>
 
             <strong>Note:</strong> KeyBoarder uses the HTML <em>kbd element</em> by default, allowing device specific treatment by the browse of the enduser. <br><br>
       	    <p><strong>Examples</strong> for writing Key-shortcuts that KeyBoarder recognizes: </p>
@@ -351,9 +381,10 @@ Make sure to take advantage of the message button on github if you have feedback
     
     <div id="footer">
       <div class="main">
-	<p>Copyright © 2011 <a href="http://www.lsauer.com/">L. Sauer</a>. The content of this website in licensed under <a href="http://creativecommons.org/licenses/by-nc/3.0/">CC-BY-NC 3.0</a>.</p>
-	<p>The design of this site is loosely based on work by <a href="mailto:neomie.thirion@gmail.com">Noémie Thirion</a>, and <a href="http://www.nicolas-petton.fr/">Nicolas Petton</a>. Shine Icon set from <a href="http://dryicons.com">DryIcons</a>.</p>
+	<p>Copyright © 2011 <a href="http://www.lsauer.com/">Lo Sauer</a>. The content of this website in licensed under <a href="http://creativecommons.org/licenses/by-nc/3.0/">CC-BY-NC 3.0</a>.</p>
+	<p>The design of this site is inspired by work from <a href="mailto:neomie.thirion@gmail.com">Noémie Thirion</a>, and <a href="http://www.nicolas-petton.fr/">Nicolas Petton</a>. Shine Icon set from <a href="http://dryicons.com">DryIcons</a>.</p>
       </div> 
+
     </div>
 
 </div></body></html>
