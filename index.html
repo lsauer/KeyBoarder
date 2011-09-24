@@ -9,7 +9,11 @@
 	<meta name="description" content=" " />
 	<meta name="author" content="Lorenz Sauer" />
 	<meta name="copyright" content="Lorenz Sauer; project: MIT License; website: CC-BY-NC 3.0" />
-	<link type="image/x-icon" rel="shortcut icon" href="res/ico/keyborder_favicon16.ico" />
+    <!-- for google plusone -->
+    <meta itemprop="name" content="KeyBorder for automatic key-shortcut outlining">
+    <meta itemprop="description" content="Drop one line of code to make key-shortcuts look good and become navigatable.">
+	
+    <link type="image/x-icon" rel="shortcut icon" href="res/ico/keyborder_favicon16.ico" />
 	<link rel="icon" href="res/ico/keyborder_favicon32.png" sizes="32x32" />
 
     <link href='http://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet' type='text/css'>
@@ -62,44 +66,32 @@
 			//window.addEventListener("onload", _siteInit ,null);
 		else
 			window.addEventListener("load", _siteInit );
+		
     </script>
   </head>
   <body>
+  
     <a href="http://github.com/lsauer/keyboarder"><img style="position: absolute; top: 0; left: 0; border: 0;" src="res/img/forkme.png" alt="Fork me on GitHub"></a>
 
     <div id="wrapper">
     <!-- START OF SOCIAL BUTTONS -->
         <section id="social">
-        <!-- data-layout:   standard; button_count; box_count.-->
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) {return;}
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#appId=168052469944126&xfbml=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-    <div class="fb-like" data-href="http://lsauer.github.com/KeyBoarder" data-send="false" data-layout="box_count" data-width="50" data-show-faces="false" data-font="verdana"></div>
-    <!-- data-count:   horizontal (default)/ vertical; -->
-    <div>
-    <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://lsauer.github.com/KeyBoarder" data-text="#KeyBoarder - outlining key shortcuts the smart way!"  data-count="vertical" data-via="sauerlo">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+
+    <!-- AddThis Button BEGIN -->
+    <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+    <a class="addthis_button_preferred_1"></a>
+    <a class="addthis_button_preferred_2"></a>
+    <a class="addthis_button_preferred_3"></a>
+    <a class="addthis_button_preferred_4"></a>
+    <a class="addthis_button_google_plusone" g:plusone:count="false"></a>
+    <a class="addthis_button_compact"></a>
+    <a class="addthis_counter addthis_bubble_style"></a>
     </div>
-    <div> 
-      <!-- Place this tag where you want the +1 button to render: data-size: standard/tall -->
-      <div class="g-plusone" data-size="tall"></div>
-      
-      <!-- Place this render call where appropriate --> 
-      <script type="text/javascript">
-      (function() {
-        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-        po.src = 'https://apis.google.com/js/plusone.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-      })();
-    </script> 
-    </div>
+    <script type="text/javascript">var addthis_config = {"data_track_addressbar":true, services_compact: 'plusone, email, facebook, twitter, more',services_exclude: 'print'};</script>
+    <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e809cc4494aaf1c"></script>
+    <!-- AddThis Button END -->
     </section>
     <!-- END OF SOCIAL BUTTONS-->
-
 
       <div id="header">
 	<div class="main">
