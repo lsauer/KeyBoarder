@@ -1,10 +1,10 @@
-<img src="http://lsauer.github.com/KeyBoarder/gh-pages/res/img/keyboard_grey.png" style="border:0px; margin:10px; margin-right:30px; float:left; zoom:0.5;">
+<img src="http://lsauer.github.com/KeyBoarder/res/img/keyboard_grey.png" style="border:0px; margin:10px; margin-right:30px; float:left; zoom:0.5;">
 
 KeyBoarder.JS
 =============
-    /*--------------------------README-------- EMDAER------------------------------*/
 ##### `    `*interactive Keyboard shortcut rendering for blogs and docs*
 
+    /*--------------------------README-------- EMDAER------------------------------*/
 
 
 **author**: Lo Sauer (c)2011; www.lsauer.com  
