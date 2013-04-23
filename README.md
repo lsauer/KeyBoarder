@@ -1,35 +1,42 @@
-  author:       L. Sauer 2011 (c); lsauer.com
-  project:      KeyBoarder
-  description:  keyBoarder is a small, fast javascript library for dynamically rendering visually 
-  appealing, navigatable keyboard shortcuts.
-  license:      MIT license (commercial use is ok)
+<img src="http://lsauer.github.com/KeyBoarder/gh-pages/res/img/keyboard_grey.png" style="border:0px; margin:10px; margin-right:30px; float:left; zoom:0.5;">
 
-Please contribute if you like the project. New CSS Styles are always welcome. <br>
-Fork it on github: https://github.com/lsauer/KeyBoarder
-Make sure to take advantage of the message button on github if you have feedback about any of this stuff.
+KeyBoarder.JS
+=============
+    /*--------------------------README-------- EMDAER------------------------------*/
+##### `    `*interactive Keyboard shortcut rendering for blogs and docs*
 
-/*--------------------------README-------EMDAER------------------------------*/
 
-== Features: ==
-    * No cluttering of your hundreds of posts,documents,... with static markup for every single shortcut key
-    * Event binding: Navigating / Focusing of each key upon press by default
-    * Beautiful design: visual feedback of the currently active key
-    * Configurable: KeyBoarder can be limited to several HTML element containers 
-    * Keyboarder can coexist: several different instances of KeyBoarder can process different 
-      parts of a site differently
-    * KeyBoarder can be turned off at any time through the method: (INT status) restore()
-    * Individual styles and events can be set down to the level of single keys
-    * Ideal for blogs, help-documentations,.. any resource with lots of shortcut keys
-    * Supports Markup, Markdown or any text-based documents well
-    * Highly configurable
-    * Works in FF, Opera and WebKit (Chrome, Safari,...)
 
-== Project ==
-	https://github.com/lsauer/KeyBoarder
-	http://code.google.com/p/keyboarder/
+**author**: Lo Sauer (c)2011; www.lsauer.com  
+**website**: https://lsauer.github.com/KeyBoarder  
+**license**: MIT or BSD - dual licensed  
+**description:**  KeyBoarder is a small, fast javascript library for dynamically rendering appealing, navigatable keyboard shortcuts  
+**note:** Please contribute if you like the project. New CSS Styles are always welcome. <br>
 
-== Getting started ==
-	<link rel="stylesheet" type="text/css" href="https://github.com/lsauer/keyboarder/raw/master/keyboarder.css">
-	<script type="text/javascript" src="https://github.com/lsauer/keyboarder/raw/master/keyboarder.js" charset="utf-8"></script>
 
-	That's it. Have fun documenting!
+#### Features:
+ - Avoid cluttering your documents with HTML tags
+ - Event binding: allow users to navigate to the shortcut-description in your document, simply by pressing the given key-combination
+ - Apealing design
+ - visual feedback of the currently pressed key(s)
+ - Configurable: KeyBoarder can be constrained to certain HTML tags
+ - compartmentalized instance. Different instances of KeyBoarder can process different parts of a site differently
+ - KeyBoarder can be turned off at any time through the method: `mykeyBoardInstance.restore(status)`, where `status` is an integer between 0-2
+ - Specificity: Individual styles and events can be set at the level of single keys
+ - Ideal for blogs, application documentations, or any other documents that describe the use of shortcut combinations
+ - Works in FireFox, Opera and WebKit (Chrome, Safari,...)
+
+#### Project Links
+- https://github.com/lsauer/KeyBoarder
+- http://code.google.com/p/keyboarder/
+
+#### Getting started
+- Include the following css:  
+```html
+	<link rel="stylesheet" type="text/css"  href="https://github.com/lsauer/keyboarder/raw/master/keyboarder.css">
+```
+
+- Include the following javascript:  
+```html
+		<script type="text/javascript" src="https://github.com/lsauer/keyboarder/raw/master/keyboarder.js" charset="utf-8"></script>
+```
