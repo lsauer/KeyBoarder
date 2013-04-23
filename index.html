@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 	<head>
@@ -380,4 +381,388 @@ Make sure to take advantage of the message button on github if you have feedback
 
     </div>
 
+=======
+<!DOCTYPE html>
+<html>
+	<head>
+    <title>KeyBoarder - making dynamic keyboard shortcut outlining fun</title>
+	<!-- Meta Tags -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+	<meta name="keywords" content="" />
+	<meta name="description" content=" " />
+	<meta name="author" content="Lorenz Sauer" />
+	<meta name="copyright" content="Lorenz Sauer; project: MIT License; website: CC-BY-NC 3.0" />
+    <!-- for google plusone -->
+    <meta itemprop="name" content="KeyBorder for automatic key-shortcut outlining">
+    <meta itemprop="description" content="Drop one line of code to make key-shortcuts look good and become navigatable.">
+	
+    <link type="image/x-icon" rel="shortcut icon" href="res/ico/keyborder_favicon16.ico" />
+	<link rel="icon" href="res/ico/keyborder_favicon32.png" sizes="32x32" />
+
+    <link href='http://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="res/css/style.css">
+    <link rel="stylesheet" type="text/css" href="keyboarder.css">
+    <script type="text/javascript" src="keyboarder.js" charset="utf-8"></script>
+    <!--<script type="text/javascript" src="https://github.com/lsauer/KeyBoarder/raw/master/keyboarder.js" charset="utf-8"></script>-->
+    <script type="text/javascript">
+		//author:l.sauer, 2011; MIT license
+		var _siteInit = function(){
+			//concise el selector function; 09/2011
+			function gel(name, child){ //get Element by name [+childName]
+				var el;
+				if( name instanceof HTMLElement )
+					el = name;
+				else
+					if( document.getElementById(name) != undefined )
+						el = document.getElementById(name);
+					else 
+						el = document.getElementsByName(name)[0];
+				if(child === undefined || el === undefined) 
+					return el;
+					
+				//search first within, otherwise outside...
+				var regx = new RegExp(child, "gi");
+				for(var i=0, els = el.children; i<els.length; i++ ){
+					if( regx.test(els[i].tagName) || regx.test(els[i].id) ){
+						return els[i];
+					}
+				}
+				for(var i=0, els = el.parentNode.children; i<els.length; i++ ){
+					if( regx.test(els[i].tagName) || regx.test(els[i].id) ){
+						return els[i];
+					}
+				}
+			}
+			
+			gel('liExamples').onchange = function wservtxt(e)
+			{
+					if( Boolean(e.target.checked) === true ){
+						gel(e.target, 'span').style.display = 'block';	//span->div
+					}else {
+						gel(e.target, 'span').style.display = 'none';
+					}
+					console.log(e, gel(e.target, 'span'));
+			};
+		}
+		if( /opera/i.test(navigator.userAgent) )
+			window.addEventListener("DOMContentLoaded", _siteInit ,null);
+			//window.addEventListener("onload", _siteInit ,null);
+		else
+			window.addEventListener("load", _siteInit );
+		
+    </script>
+  </head>
+  <body>
+  
+    <a href="http://github.com/lsauer/keyboarder"><img style="position: absolute; top: 0; left: 0; border: 0;" src="res/img/forkme.png" alt="Fork me on GitHub"></a>
+
+    <div id="wrapper">
+    <!-- START OF SOCIAL BUTTONS -->
+        <section id="social">
+
+    <!-- AddThis Button BEGIN -->
+    <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+    <a class="addthis_button_preferred_1"></a>
+    <a class="addthis_button_preferred_2"></a>
+    <a class="addthis_button_preferred_3"></a>
+    <a class="addthis_button_preferred_4"></a>
+    <a class="addthis_button_google_plusone" g:plusone:count="false"></a>
+    <a class="addthis_button_compact"></a>
+    <!--><a class="addthis_counter addthis_bubble_style"></a>-->
+    </div>
+    <script type="text/javascript">var addthis_config = {"data_track_addressbar":true, services_compact: 'plusone, email, facebook, twitter, more',services_exclude: 'print'};</script>
+    <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e809cc4494aaf1c"></script>
+    <!-- AddThis Button END -->
+    </section>
+    <!-- END OF SOCIAL BUTTONS-->
+
+      <div id="header">
+	<div class="main">
+	  <div class="logo">
+      <embed style="float:left;" src="res/svg/keyboardkey.svg" type="image/svg+xml" width="160" height="160" viewBox="0 0 160 160" />
+      <h1>KeyBoarder</h1> <br>
+      <em style="letter-spacing:.1em;">making keyboard shortcut outlining fun</em></div>
+	  <div class="clear"></div>
+
+	</div>
+      </div>
+
+      <div class="teaser">
+	<div class="main">
+	  <h3>KeyBoarder dynamically renders navigatable keyboard shortcuts</h3>
+	  <div class="column">
+	    <p><span class="content">KeyBoarder automatically converts<strong> textual references</strong> of keyboard shortcuts <strong>into graphical representations</strong>. The process is <strong>fast</strong>, the javascript-codebase <strong>small</strong> and <strong>independent</strong> of other libraries (such as jQuery), allowing to keep overhead to minimum when necessary.<br>
+          The idea behind KeyBoarder is that updating past or upcoming <strong>documents with markup</strong> just for rendering shortcut-keys <strong>is inflexible</strong> and tedious. When an update would require editing  hundreds of blog articles or dozens of documents, or recompiling documentation libraries, KeyBoarder is the solution.<br>
+          Additionally, KeyBoarder seeks to enable <strong>easy event binding</strong> for the dynamically created shortcut keys. A default event-binder  enables<strong> jumping from  shortcut to shortcut</strong> by pressing the respective key of the shortcut.<br>
+	    </span><span class="content"><br>
+        <strong>KeyBoarder provides three things: </strong><br>
+<li class="liOptions"><img src="res/img/design_dryiconsDOTcom.png" width="80" height="80" class="IconFeature"> <strong>Design:</strong><br>
+	        <br>
+          choose from a multitude of asthetic design options</li><br>
+<li class="liOptions"><img src="res/img/mouse_info_dryiconsDOTcom.png" width="80" height="80" class="IconFeature"> <strong>Interactivity: </strong><br>
+	        <br>
+          navigate shortcuts by their respective key</li><br>
+<li class="liOptions"><img src="res/img/process_dryiconsDOTcom.png" width="80" height="80" class="IconFeature"> <strong>Dynamic rendering: </strong><br>
+	       <br>
+         no need to mess up documents with static markup</li><br>
+
+      </span></div>
+	  <div class="column content">
+<div class="divKb">		<strong>KeyBoarder Details:<br>
+  </strong> KeyBoarder takes as configuration arguments the className of the HTML elements containing the content to be outlined (e.g. in blog posts this is often <i>'content'</i>). Several other options are available, and explained within the javascript-file. <br>
+  <br />
+From the <strong>design</strong> perspective, KeyBoarder features several beautiful styles to choose from. As such KeyBoarder can also be used as a  CSS-design library. <br>
+<div class="demoDiv" style="background-color:inherit;">
+  <kbd class="xtrm kbKey">BASE </kbd><br>
+		<kbd class="xtrm kbKeyModern" title="This is the modern kbKey-class" style="cursor:help">MODERN</kbd><br>
+        <kbd class="xtrm kbKeyFancy">Fancy</kbd><br>
+		<kbd class="xtrm kbKeyDark">Dark</kbd><br>
+		<kbd class="xtrm kbKeyLight">Light</kbd>
+ 		<kbd class="xtrm kbKeySimple">Simple</kbd>
+</div>
+<div class="xtrm demoDiv" >
+        <kbd class="xtrm kbKey">BASE </kbd><br>
+		<kbd class="xtrm kbKeyModern" title="This is the modern kbKey-class" style="cursor:help">MODERN</kbd><br>
+        <kbd class="xtrm kbKeyFancy">Fancy</kbd><br>
+		<kbd class="xtrm kbKeyDark">Dark</kbd><br>
+		<kbd class="xtrm kbKeyLight">Light</kbd>
+ 		<kbd class="xtrm kbKeySimple">Simple</kbd>
+  </div>
+		
+        
+<p><strong>Interactivity:</strong> Upon pressing a key which is part of a rendered shortcut, KeyBoarder will highlight and focus the key-shortcut, and  advance with each further press to the next matching shortcut.<br>
+Keys can be bound to other events (e.g. the mousewheel), and/or rendered individually on per key-class basis. Designing is simpe, by assigning CSS-classes (e.g. .kbCTRL {...} ).<br />
+	<br />
+	<strong>Dynamic Rendering</strong> recognizes textual shortcuts and outlines the matched shortcuts in markup code. The process requires  shortcuts to conform to certain text conventions: UPPERCASE or Startcase keys, concatenated by a symbol e.g. '+', '-' or '~', 'and'.... <br>
+	A lower limit can be set on the number of consecutive keys that must be present, in order for shortcut rendering to  take place. e.g. rendering ALT+X but not ALT</p></div>
+	  </div>
+	  <div class="clear"></div>
+      
+      	  <div class="content divExamples">
+                        <li class="liFeature liTick"> <input type="checkbox" name="liExamples" id="liExamples" value="true"> <label for="liExamples">Tick, to show example usage and demonstrations </label><span id="spWservtxt" style="display:none; padding:10px;"><br>
+
+            <strong>Note:</strong> KeyBoarder uses the HTML <em>kbd element</em> by default, allowing device specific treatment by the browse of the enduser. <br><br>
+      	    <p><strong>Examples</strong> for writing Key-shortcuts that KeyBoarder recognizes: </p>
+<pre>This is a simple shortcut ALT+WIN+U 
+The presentation mode can be started by: ALT + WIN+ P /*this is fine!*/
+somewhere in the text, ALT + RETURN - a key shortcut!
+...in order to enter the text press, STRG+ ENTER
+you can set different styles in preformatted tex
+            </pre>
+<strong>For demonstration</strong>, provided is an excerpt of the shortcut key table for Open Office Writer:<br>
+<br>
+<table border="0" style="border:1px solid #aaa; border-radius:6px;" class="kbKeyModern">
+  <tbody>
+    <tr>
+      <th> Shortcut Keys </th>
+      <th> Effect </th>
+    </tr>
+    <tr>
+      <td><i>Ctrl+A</i></td>
+      <td> Select All. </td>
+    </tr>
+    <tr>
+      <td><i>Ctrl+J</i></td>
+      <td> Justify. </td>
+    </tr>
+    <tr>
+      <td><i>Ctrl+D</i></td>
+      <td> Double Underline. </td>
+    </tr>
+    <tr>
+      <td><i>Ctrl+E</i></td>
+      <td> Centred. </td>
+    </tr>
+    <tr>
+      <td><i>Ctrl+F</i></td>
+      <td> Find and Replace. </td>
+    </tr>
+    <tr>
+      <td><i>Ctrl+Shift+P</i></td>
+      <td> Superscript. </td>
+    </tr>
+    <tr>
+      <td><i>Ctrl+L</i></td>
+      <td> Align Left. </td>
+    </tr>
+    <tr>
+      <td><i>Ctrl+R</i></td>
+      <td> Align Right. </td>
+    </tr>
+    <tr>
+      <td><i>Ctrl+Shift+B</i></td>
+      <td> Subscript. </td>
+    </tr>
+    <tr>
+      <td><i>Ctrl+Y</i></td>
+      <td> Redo last action. </td>
+    </tr>
+    <tr>
+      <td><i>Ctrl+0 (zero)</i></td>
+      <td> Apply Default paragraph style. </td>
+    </tr>
+    <tr>
+      <td><i>Ctrl+1</i></td>
+      <td> Apply Heading 1 paragraph style. </td>
+    </tr>
+    <tr>
+      <td><i>Ctrl+2</i></td>
+      <td> Apply Heading 2 paragraph style. </td>
+    </tr>
+    <tr>
+      <td><i>Ctrl+3</i></td>
+      <td> Apply Heading 3 paragraph style. </td>
+    </tr>
+    <tr>
+      <td><i>Ctrl+5</i></td>
+      <td> 1.5 Line Spacing. </td>
+    </tr>
+    <tr>
+      <td><i>Ctrl+Enter</i></td>
+      <td> Manual page break. </td>
+    </tr>
+    <tr>
+      <td><i>Ctrl+Shift+Enter</i></td>
+      <td> Column break in multi-columnar texts. </td>
+    </tr>
+    <tr>
+      <td><i>Alt+Enter</i></td>
+      <td> Inserting a new paragraph without numbering. </td>
+    </tr>
+    <tr>
+      <td><i>Alt+Enter</i></td>
+      <td> Inserting a new paragraph directly before or after a section or a table. </td>
+    </tr>
+  </tbody>
+</table>
+<p><br>
+  In the example above CTRL is styled individually by defining the css-key class:<span style="background-color:rgb(255, 255, 255);"><span style="color:rgb(128, 0, 0); "> <br>
+    .kbCTRL </span><span style="color:rgb(0, 0, 0); ">{</span><span style="color:rgb(255, 0, 0); "> text-decoration</span><span style="color:rgb(0, 0, 0); ">:</span><span style="color:rgb(0, 0, 255); ">overline</span><span style="color:rgb(0, 0, 0); ">;</span><span style="color:rgb(255, 0, 0); "> font-weight</span><span style="color:rgb(0, 0, 0); ">:</span><span style="color:rgb(0, 0, 255); ">bold</span><span style="color:rgb(0, 0, 0); ">;</span><span style="color:rgb(255, 0, 0); "> </span><span style="color:rgb(0, 0, 0); ">}</span></span> <br>
+<br />
+  <strong>Keys can be nested: </strong></p>
+<p>STRG - ALT - DEL //Single key reconition mode is set, thus the last key 'Del' is recognized but not the others, as the current concatenator symbol is set to '+'<br />
+  <kbd class="kbKey kbKeyNested"> STRG+ WIN+O </kbd> <br />
+  <kbd class="kbKey kbKeyNested"> STRG+P+D </kbd> WIN T , or RETURN X should not be rendered<br />
+  <kbd class="kbKey kbKeyNested"> CTRL+ALT+O </kbd>fsf asdfdsf<br>
+  <br>
+  <br>
+    <strong>When Keys are not rendered:</strong><br>
+<br>
+In the following examples, keys will<strong> not be rendered</strong> due to varrying issues (with KeyBoarder v.7 most are rendered): <br>
+<br>
+STRG - ALT - DEL //Without single key reconition mode, this text will not be rendered, since the concatenation-symbol in this example is set to '+'<br />
+  </p>
+	<pre>
+STG+ALT //missspelling<br>
+STRG+OI //missing concatenator
+ALT+G�Z //non recognized concatenator</pre><br><strong>When Keys ARE rendered:</strong><br>
+<pre>
+"ALT + DEL"
+CTRL+ALT - DEL  //Del is not part of the shortcut,<br>// since '-' is not set as a concatenation symbol
+,ALT+DEL",
+</pre>
+<p>press the following combination
+  ALT+I, / ALT+X, <br>
+  </p>
+<p><strong>Misc  Notes:</strong><br>
+  <br>
+  <strong>
+    <input type="text" size="2" onKeyUp="this.value = event.keyCode; this.select();" />
+    Q</strong>uickly determine a keyCode with just one line of code, - in case the key-mappings do not match the most common keyboard layout of your audience. Click in the box and press a key. Once letting go of the key, the keyCode value will be written into the box. To implement this in your own site, use the following code: </p>
+<pre>  <span class="Apple-style-span" style="color: rgb(80, 80, 80); font-family: monospace; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-decorations-in-effect: none; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); "><span style="color:rgb(0, 128, 128); ">1</span> <span style="color:rgb(0, 0, 255); ">&lt;</span><span style="color:rgb(128, 0, 0); ">input </span><span style="color:rgb(255, 0, 0); ">type</span><span style="color:rgb(0, 0, 255); ">="text"</span><span style="color:rgb(255, 0, 0); "> size</span><span style="color:rgb(0, 0, 255); ">="2"</span><span style="color:rgb(255, 0, 0); "> onKeyUp</span><span style="color:rgb(0, 0, 255); ">="this.value = event.keyCode; this.select();"</span><span style="color:rgb(255, 0, 0); "> </span><span style="color:rgb(0, 0, 255); ">/&gt;</span></span>  
+</pre>
+<strong>Readme:</strong><br>
+<textarea style="width:98%; height:12em; border-radius:.8em;">
+  author:       L. Sauer 2011 (c); lsauer.com
+  project:      KeyBoarder
+  description:  keyBoarder is a small, fast javascript library for dynamically rendering visually 
+  appealing, navigatable keyboard shortcuts.
+  license:      MIT license (commercial use is ok)
+
+Please contribute if you like the project. New CSS Styles are always welcome. <br>
+Fork it on github: https://github.com/lsauer/KeyBoarder
+Make sure to take advantage of the message button on github if you have feedback about any of this stuff.
+
+/*--------------------------README-------EMDAER------------------------------*/
+
+== Features: ==
+    * No cluttering of your hundreds of posts,documents,... with static markup for every single shortcut key
+    * Event binding: Navigating / Focusing of each key upon press by default
+    * Beautiful design: visual feedback of the currently active key
+    * Configurable: KeyBoarder can be limited to several HTML element containers 
+    * Keyboarder can coexist: several different instances of KeyBoarder can process different 
+      parts of a site differently
+    * KeyBoarder can be turned off at any time through the method: (INT status) restore()
+    * Individual styles and events can be set down to the level of single keys
+    * Ideal for blogs, help-documentations,.. any resource with lots of shortcut keys
+    * Supports Markup, Markdown or any text-based documents well
+    * Highly configurable
+
+== Project ==
+	https://github.com/lsauer/KeyBoarder
+	http://code.google.com/p/keyboarder/
+
+== Getting started ==
+	<link rel="stylesheet" type="text/css" href="https://github.com/lsauer/keyboarder/raw/master/keyboarder.css">
+	<script type="text/javascript" src="https://github.com/lsauer/keyboarder/raw/master/keyboarder.js" charset="utf-8"></script>
+
+	That's it. Have fun documenting!
+</textarea>
+
+
+</span></li>
+      	  </div>
+	</div>
+	
+	
+      </div>
+      
+      <div id="content">
+	<div class="main">
+	  <div class="box">
+  <h3>Getting started</h3>
+  <div class="content">
+    <p> Only two lines of code are required. Load KeyBoarder by including keyboarder.css and for dynamic rendering keyboarder.js</p>
+  </div>
+
+    <div class="highlight"><pre><code class="html">
+    <div><span style="color: #008080;">1</span> <span style="color: #0000FF;">&lt;</span><span style="color: #800000;">head</span><span style="color: #0000FF;">&gt;</span><span style="color: #000000;">
+</span><span style="color: #008080;">2</span> <span style="color: #000000;"></span><span style="color: #0000FF;">&lt;</span><span style="color: #800000;">title</span><span style="color: #0000FF;">&gt;</span><span style="color: #000000;">KeyBoarder Demo site - JS Library for dynamic keybord shortcut rendering</span><span style="color: #0000FF;">&lt;/</span><span style="color: #800000;">title</span><span style="color: #0000FF;">&gt;</span><span style="color: #000000;">
+</span><span style="color: #008080;">3</span> <span style="color: #0000FF;">&lt;</span><span style="color: #800000;">style</span><span style="color: #0000FF;">&gt;</span><span style="background-color: #F5F5F5; color: #800000;">
+</span><span style="color: #008080;"><strong>4</strong></span> <strong><span style="background-color: #F5F5F5; color: #800000;">@import url(&quot;https://github.com/lsauer/KeyBoarder/raw/master/keyboarder.css&quot;)</span></strong><span style="background-color: #F5F5F5; color: #800000;">; 
+</span><span style="color: #008080;">5</span> <span style="color: #0000FF;">&lt;/</span><span style="color: #800000;">style</span><span style="color: #0000FF;">&gt;</span><span style="color: #000000;">
+</span><span style="color: #008080;"><strong>6</strong></span> <strong><span style="color: #0000FF;">&lt;</span><span style="color: #800000;">script </span><span style="color: #FF0000;">type</span><span style="color: #0000FF;">=&quot;text/javascript&quot;</span><span style="color: #FF0000;"> src</span><span style="color: #0000FF;">=&quot;https://github.com/lsauer/KeyBoarder/raw/master/keyboarder.js&quot;</span><span style="color: #FF0000;"> <span style="color: #000000;">
+</span>&nbsp;&nbsp;&nbsp;charset</span><span style="color: #0000FF;">=&quot;utf-8&quot;&gt;&lt;/</span><span style="color: #800000;">script</span><span style="color: #0000FF;">&gt;</span></strong><span style="color: #000000;">
+</span><span style="color: #008080;">7</span> <span style="color: #000000;"></span><span style="color: #0000FF;">&lt;/</span><span style="color: #800000;">head</span><span style="color: #0000FF;">&gt;</span> .......</div>
+</code></pre>
+</div>
+
+</div>
+
+
+<div class="box last">
+  <h3 id="download">Download</h3>
+  <div class="content">
+    <p>You can get a copy of KeyBoarder from github or clone the <a href="http://github.com/lsauer/keyboarder">git repository</a>.</p> 
+    <a href="http://github.com/lsauer/keyboarder/zipball/master">
+      <img src="./res/img/iconzip.png" width="80" height="80" border="0"></a>
+    <a href="http://github.com/lsauer/keyboarder/tarball/master">
+      <img src="./res/img/icontar.png" width="80" height="80" border="0"></a>
+  </div>
+</div>
+
+
+	</div>
+      </div>
+    
+    <div id="footer">
+      <div class="main">
+	<p>Copyright © 2011 <a href="http://www.lsauer.com/">Lo Sauer</a>. The content of this website in licensed under <a href="http://creativecommons.org/licenses/by-nc/3.0/">CC-BY-NC 3.0</a>.</p>
+	<p>The design of this site is inspired by work from <a href="mailto:neomie.thirion@gmail.com">Noémie Thirion</a>, and <a href="http://www.nicolas-petton.fr/">Nicolas Petton</a>. Shine Icon set from <a href="http://dryicons.com">DryIcons</a>.</p>
+      </div> 
+
+    </div>
+
+>>>>>>> origin/gh-pages
 </div></body></html>
