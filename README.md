@@ -38,5 +38,5 @@ KeyBoarder.JS
 
 - Include the following javascript:  
 ```html
-		<script type="text/javascript" src="https://github.com/lsauer/keyboarder/raw/master/keyboarder.js" charset="utf-8"></script>
+    <script type="text/javascript" src="https://github.com/lsauer/keyboarder/raw/master/keyboarder.js" charset="utf-8"></script>
 ```
